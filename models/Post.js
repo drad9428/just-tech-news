@@ -2,11 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 // create our Post model
 class Post extends Model {
-  static upvote(body, models){
+  static upvote(body, models) {
     return models.Vote.create({
       user_id: body.user_id,
       post_id: body.post_id
-    }).then(() =>{
+    }).then(() => {
       return Post.findOne({
         where: {
           id: body.post_id
@@ -17,12 +17,12 @@ class Post extends Model {
           'title',
           'created_at',
           [
-            sequelize.literal('(SELCET COUNT(*) FROM vote WHERE post.id = vote.post_id'),
+            sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'),
             'vote_count'
           ]
         ]
-      })
-    })
+      });
+    });
   }
 }
 
