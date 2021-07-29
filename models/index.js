@@ -4,7 +4,7 @@ const User = require('./User')
 const Vote = require('./Vote')
 
 // create associations
-User.BelongsToMany(Post, {
+User.belongsToMany(Post, {
   through: Vote,
   as: 'voted_posts',
   foreignKey: 'user_id'
